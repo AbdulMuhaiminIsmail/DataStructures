@@ -13,7 +13,8 @@ private:
 public:
 	Queue(int maxSize) : maxSize(maxSize), currElements(0) {}
 
-	void print() {
+	void print() 
+	{
 		queue.printList();
 	}
 
@@ -24,18 +25,18 @@ public:
 			return;
 		}
 
-		stack.deleteEnd();
+		queue.deleteStart();
 		currElements--;
 	}
 
 	T front() const
 	{
-		return queue.getHead();
+		return queue.getHeadValue();
 	}
 
 	T rear() const
 	{
-		return queue.getTail();
+		return queue.getTailValue();
 	}
 
 	void enqueue(T const element)
@@ -45,7 +46,7 @@ public:
 			return;
 		}
 
-		queue.insertAtStart(element);
+		queue.insertAtEnd(element);
 		currElements++;
 	}
 
@@ -65,37 +66,39 @@ public:
 	}
 
 	void clear() {
-		for (int i = 0; i < currElements; i++) {
+		int size = currElements;
+		for (int i = 0; i < size; i++) {
 			dequeue();
 		}
 	}
 
-	LinkedList<T> getQueue() {
+	LinkedList<T>& getQueue() {
 		return queue;
 	}
 
 	void arrange() {
-		if (currElements%2 == 0) return;
+		if (currElements % 2 == 1) return;
 
-		T ptr1 = queue.getHead();
-		T ptr2 = queue.accessNode(currElements / 2)->value;
+		auto ptr1 = queue.getHead();
+		auto ptr2 = queue.accessNode(currElements / 2);
 		Queue<T> temp(currElements);
 
 		for (int i = 0; i < currElements; i++) {
 			if (i % 2 == 0) {
-				temp.enqueue(ptr1);
+				temp.enqueue(ptr1->value);
+				ptr1 = ptr1->next;
 			}
 			else {
-				temp.enqueue(ptr2);
+				temp.enqueue(ptr2->value);
+				ptr2 = ptr2->next;
 			}
 		}
 
 		clear();
 
-		for (int i = 0; i < currElements; i++) {
-			enqueue(temp.getQueue().accessNode(i)->value);
+		for (auto iter = temp.getQueue().getHead(); iter; iter = iter->next) {
+			enqueue(iter->value);
 		}
-
 	}
 
 };
@@ -119,7 +122,5 @@ int main()
 
 	q.print();
 
-	_getch();
 	return 0;
 }
-
