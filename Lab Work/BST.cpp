@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stack>
+#include <queue>
 using namespace std;
 
 template <typename T> class BST {
@@ -149,6 +150,24 @@ public:
 
 		return (countLeaves(curr->left) + countLeaves(curr->right));
 	}
+
+	void levelOrderI() {
+		queue<Node*> queue;
+		Node* curr = root;
+		queue.push(root);
+
+		while (!queue.empty()) {
+			Node* front = queue.front();
+			if (!front) return;
+
+			cout << front->data << " ";
+			if (front->left) queue.push(front->left);
+			if (front->right) queue.push(front->right);
+			queue.pop();
+		}
+
+		cout << endl;
+	}
 };
 
 int main() {
@@ -166,12 +185,15 @@ int main() {
 		tree.inorderR();
 
 		BST<int> tree2 = tree;
+
 		tree2.inorderR();
 
 		cout << "Number of nodes in the tree: " << tree.countNodes() << endl;
 		cout << "Number of leaves in the tree: " << tree.countLeaves() << endl;
 
 		tree.inorderI();
+
+		tree.levelOrderI();			// Uses BFS
 	}
 	_CrtDumpMemoryLeaks() ? cout << "Memory leaks found\n" : cout << "No memory leaks found\n";
 }
