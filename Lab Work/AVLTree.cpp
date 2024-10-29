@@ -25,6 +25,7 @@ public:
 
 	AVLNode* insert(AVLNode*& curr, T data) {
 		if (!curr) {
+			cout << "Inserting new node " << data << endl;
 			return new AVLNode(data, nullptr, nullptr);
 		}
 
@@ -172,46 +173,36 @@ public:
 		remove(root, data);
 	}
 
-	AVLNode* remove(AVLNode* root, T x) {
-		// Base case
-		if (root == NULL) return root;
+	AVLNode* remove(AVLNode*& root, T key) {
+		// base case (key not found)
+		if (!root) return root;
 
-		// If key to be searched is in a subtree
-		if (root->data > x)
-			root->left = remove(root->left, x);
-		else if (root->data < x)
-			root->right = remove(root->right, x);
-
-		// If root matches with the given key
+		// search for the key
+		if (key < root->data) {
+			root->left = remove(root->left, key);
+		}
+		else if (key > root->data) {
+			root->right = remove(root->right, key);
+		}
 		else {
-
-			// Cases when root has 0 children
-			// or only right child
-			if (root->left == NULL) {
-				AVLNode* temp = root->right;
-				delete root;
-				/*cout << "Balance Factor of " << root->data << " is: " << balanceFactor(root) << endl;
-				cout << "Height of " << root->data << " is: " << root->height << endl;*/
-				return temp;
+			if (root->left && root->right) {
+				AVLNode* succ = findSuccessor(root);
+				root->data = succ->data;
+				root->right = remove(root->right, succ->data);
 			}
+			else {
+				AVLNode* temp = root;
+				(!root->left) ? root = root->right : root = root->left;
+				delete temp;
 
-			// When root has only left child
-			if (root->right == NULL) {
-				AVLNode* temp = root->left;
-				delete root;
-				/*cout << "Balance Factor of " << root->data << " is: " << balanceFactor(root) << endl;
-				cout << "Height of " << root->data << " is: " << root->height << endl;*/
-				return temp;
+				if (root) {
+					cout << "Balance Factor of " << root->data << " is: " << balanceFactor(root) << endl;
+					cout << "Height of " << root->data << " is: " << root->height << endl;
+				}
 			}
-
-			// When both children are present
-			AVLNode* succ = findSuccessor(root);
-			root->data = succ->data;
-			root->right = remove(root->right, succ->data);
 		}
 
 		balance(root);
-
 		return root;
 	}
 
