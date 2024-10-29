@@ -31,6 +31,9 @@ public:
 		(data < curr->data) ? curr->left = insert(curr->left, data) : curr->right = insert(curr->right, data);
 		curr->height = max(height(curr->left), height(curr->right)) + 1;
 
+		cout << "Balance Factor of " << curr->data << " is: " << balanceFactor(curr) << endl;
+		cout << "Height of " << curr->data << " is: " << curr->height << endl;
+
 		balance(curr);
 
 		return curr;
@@ -52,7 +55,7 @@ public:
 		return (balanceFactor(node) > 1);
 	}
 
-	AVLNode* searchParent(AVLNode* child) {
+	AVLNode*& searchParent(AVLNode* child) {
 		AVLNode* curr = root;
 
 		while (curr) {
@@ -101,7 +104,7 @@ public:
 	void leftRightRotate(AVLNode*& node) {
 		AVLNode* X = node;
 		AVLNode* Y = X->left;
-		
+
 		leftRotate(Y);
 		rightRotate(X);
 	}
@@ -117,11 +120,13 @@ public:
 	void balance(AVLNode*& node) {
 		if (isLeftHeavy(node)) {
 			cout << node->data << " is left heavy" << endl;
+			cout << "Balancing at " << node->data << endl;
 			(balanceFactor(node->left) < 0) ? rightRotate(node) : leftRightRotate(node);
 		}
 
 		if (isRightHeavy(node)) {
 			cout << node->data << " is right heavy" << endl;
+			cout << "Balancing at " << node->data << endl;
 			(balanceFactor(node->right) > 0) ? leftRotate(node) : rightLeftRotate(node);
 		}
 	}
@@ -152,6 +157,63 @@ public:
 		std::cout << std::endl;  // Newline after traversal
 	}
 
+	AVLNode* findSuccessor(AVLNode* root) {
+		if (!root->right) return root->right;
+		findSuccessor(root->right, 1);
+	}
+
+	AVLNode* findSuccessor(AVLNode* root, int x) {
+		if (!root->left) return root;
+
+		findSuccessor(root->left, 1);
+	}
+
+	void remove(T data) {
+		remove(root, data);
+	}
+
+	AVLNode* remove(AVLNode* root, T x) {
+		// Base case
+		if (root == NULL) return root;
+
+		// If key to be searched is in a subtree
+		if (root->data > x)
+			root->left = remove(root->left, x);
+		else if (root->data < x)
+			root->right = remove(root->right, x);
+
+		// If root matches with the given key
+		else {
+
+			// Cases when root has 0 children
+			// or only right child
+			if (root->left == NULL) {
+				AVLNode* temp = root->right;
+				delete root;
+				/*cout << "Balance Factor of " << root->data << " is: " << balanceFactor(root) << endl;
+				cout << "Height of " << root->data << " is: " << root->height << endl;*/
+				return temp;
+			}
+
+			// When root has only left child
+			if (root->right == NULL) {
+				AVLNode* temp = root->left;
+				delete root;
+				/*cout << "Balance Factor of " << root->data << " is: " << balanceFactor(root) << endl;
+				cout << "Height of " << root->data << " is: " << root->height << endl;*/
+				return temp;
+			}
+
+			// When both children are present
+			AVLNode* succ = findSuccessor(root);
+			root->data = succ->data;
+			root->right = remove(root->right, succ->data);
+		}
+
+		balance(root);
+
+		return root;
+	}
 
 };
 
@@ -159,25 +221,18 @@ public:
 int main() {
 	AVLTree<int> tree;
 
-	tree.insert(1);
-	tree.levelOrderTraversal();
-	tree.insert(2);
-	tree.levelOrderTraversal();
-	tree.insert(3);
-	tree.levelOrderTraversal();
-	tree.insert(4);
-	tree.levelOrderTraversal();
-	tree.insert(5);
-	tree.levelOrderTraversal();
-	tree.insert(6);
-	tree.levelOrderTraversal();
-	tree.insert(7);
-	tree.levelOrderTraversal();
-	tree.insert(8);
-	tree.levelOrderTraversal();
-	tree.insert(9);
-	tree.levelOrderTraversal();
+	tree.insert(30);
+	tree.insert(20);
+	tree.insert(40);
 	tree.insert(10);
+	tree.insert(25);
+	tree.insert(50);
+	tree.insert(5);
+
 	tree.levelOrderTraversal();
 
+	tree.remove(25);
+	tree.remove(30);
+
+	tree.levelOrderTraversal();
 }
