@@ -1,0 +1,71 @@
+﻿  AVL.cpp
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(202,31): error C2061: syntax error: identifier 'User'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(203,16): error C3861: 'indexID': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(203,46): error C3861: 'user': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(206,7): error C3861: 'user': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(207,41): error C3861: 'user': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(210,42): error C3861: 'user': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(213,3): error C3861: 'indexID': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(213,18): error C3861: 'user': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(203,16): error C2065: 'indexID': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(203,46): error C2065: 'user': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(206,7): error C2065: 'user': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(207,41): error C2065: 'user': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(210,42): error C2065: 'user': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(213,3): error C2065: 'indexID': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(213,18): error C2065: 'user': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(12,29): error C2989: 'AVLTree': class template has already been declared as a non-class template
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(12,1): error C3857: 'AVLTree': multiple template parameter lists are not allowed
+  DLL.cpp
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(18,7): error C2143: syntax error: missing ';' before '*'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(18,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(18,20): error C2238: unexpected token(s) preceding ';'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(22,19): error C2061: syntax error: identifier 'Node'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(27,42): error C2061: syntax error: identifier 'Node'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(196,6): error C2143: syntax error: missing ';' before '*'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(196,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(196,52): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(205,22): error C2061: syntax error: identifier 'Node'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(221,6): error C2143: syntax error: missing ';' before '*'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(221,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(221,37): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(22,103): error C3861: 'userAddress': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(22,115): error C3861: 'userAddress': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(22,115): error C2065: 'userAddress': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(29,29): error C3861: 'userAddress': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(32,63): error C3861: 'userAddress': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(32,118): error C3861: 'userAddress': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(29,29): error C2065: 'userAddress': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(32,63): error C2065: 'userAddress': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(32,118): error C2065: 'userAddress': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(206,29): error C3861: 'userAddress': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(206,29): error C2065: 'userAddress': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(21,15): error C2990: 'AVLTree': non-class template has already been declared as a class template
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(203,24): error C2039: 'getParentForInsertion': is not a member of 'AVLTree<int>'
+  UserList.cpp
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(18,7): error C2143: syntax error: missing ';' before '*'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(18,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(18,20): error C2238: unexpected token(s) preceding ';'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(22,19): error C2061: syntax error: identifier 'Node'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(27,42): error C2061: syntax error: identifier 'Node'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(196,6): error C2143: syntax error: missing ';' before '*'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(196,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(196,52): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(205,22): error C2061: syntax error: identifier 'Node'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(221,6): error C2143: syntax error: missing ';' before '*'
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(221,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(221,37): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(22,103): error C3861: 'userAddress': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(22,115): error C3861: 'userAddress': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(22,115): error C2065: 'userAddress': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(29,29): error C3861: 'userAddress': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(32,63): error C3861: 'userAddress': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(32,118): error C3861: 'userAddress': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(29,29): error C2065: 'userAddress': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(32,63): error C2065: 'userAddress': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(32,118): error C2065: 'userAddress': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(206,29): error C3861: 'userAddress': identifier not found
+E:\Programming\CustomerServiceModule\CustomerServiceModule\AVL.cpp(206,29): error C2065: 'userAddress': undeclared identifier
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(21,15): error C2990: 'AVLTree': non-class template has already been declared as a class template
+E:\Programming\CustomerServiceModule\CustomerServiceModule\DLL.cpp(203,24): error C2039: 'getParentForInsertion': is not a member of 'AVLTree<int>'
+  Generating Code...
