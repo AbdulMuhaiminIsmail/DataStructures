@@ -36,6 +36,9 @@ class User {
 	static int currentUserID;
 
 public:
+	User(int userID, string userName, string userEmail, string userCountry, Type userType)
+		: userID(userID), userName(userName), userEmail(userEmail), userCountry(userCountry), userType(userType) {}
+
 	User(string userName, string userEmail, string userCountry, Type userType)
 		: userID(++currentUserID), userName(userName), userEmail(userEmail), userCountry(userCountry), userType(userType) {}
 
@@ -545,19 +548,19 @@ int main() {
 	{
 		UserList userList;
 
-		User user1("Muhaimin", "muhaimin1@gmail.com", "Pakistan", Platinum);
+		User user1(2, "Muhaimin", "muhaimin1@gmail.com", "Pakistan", Platinum);
 		userList.addUser(user1);
 
-		User user2("Ahmed", "ahmed2@gmail.com", "Pakistan", Gold);
+		User user2(5, "Ahmed", "ahmed2@gmail.com", "Pakistan", Gold);
 		userList.addUser(user2);
 
-		User user3("Sara", "sara3@gmail.com", "Pakistan", Silver);
+		User user3(3, "Sara", "sara3@gmail.com", "Pakistan", Silver);
 		userList.addUser(user3);
 
-		User user4("Ali", "ali4@gmail.com", "Pakistan", Regular);
+		User user4(1, "Ali", "ali4@gmail.com", "Pakistan", Regular);
 		userList.addUser(user4);
 
-		User user5("Fatima", "fatima5@gmail.com", "Pakistan", New);
+		User user5(4, "Fatima", "fatima5@gmail.com", "Pakistan", New);
 		userList.addUser(user5);
 
 		userList.printList();
