@@ -83,6 +83,14 @@ private:
 
 	AVLNode* root;
 
+	AVLNode* search(AVLNode* root, T key) {
+		if (!root) return nullptr;
+
+		if (root->data == key) return root;
+
+		return (key > root->data) ? search(root->right, key) : search(root->left, key);
+	}
+
 	AVLNode* insert(AVLNode*& curr, T data, Node<User>* userAddress) {
 		if (!curr) {
 			return new AVLNode(data, userAddress, nullptr, nullptr);
@@ -302,6 +310,10 @@ public:
 		levelOrderTraversal(root);
 	}
 
+	AVLNode* search(int key) {
+		return search(root, key);
+	}
+
 	AVLNode* getParent(T key) {
 		return getParent(root, key);
 	}
@@ -430,14 +442,26 @@ public:
 		if (tail) tail->next = nullptr;
 	}
 
-	Node<T>*& removeTail() {
-		Node<T>* temp = tail;
-		tail = tail->prev;
-		if (tail) tail->next = nullptr;
-		else head = tail = nullptr;
-		return temp;
-	}
+	void deleteNode(Node<T>*& node) {
+		if (node == nullptr) return;
 
+		if (node == head) {
+			deleteHead();
+			return;
+		}
+
+		if (node == tail) {
+			deleteTail();
+			return;
+		}
+
+		node->prev->next = node->next;
+		node->next->prev = node->prev;
+		node->next = node->prev = nullptr;
+
+		delete node;
+	}
+	
 	void printForward() const {
 		if (!head) return;
 		for (auto iter = fbegin(); iter != fend(); ++iter) {
@@ -522,6 +546,30 @@ public:
 		}
 	}
 
+	void searchUser(int userID) {
+		auto user = indexID.search(userID);
+		if (!user) {
+			cout << "User with the given ID does not exist" << endl;
+			return;
+		}
+		else {
+			printUser(user->userAddress->data);	// user is the avl node containing address of user in dll and data contains user object
+		}
+	}
+
+	void delUser(int userID) {
+		auto user = indexID.search(userID);
+		if (!user) {
+			cout << "User with userId " << userID << " does not exist" << endl;
+			return;
+		}
+		else {
+			users.deleteNode(user->userAddress);
+			indexID.remove(userID);
+			cout << "User with userId " << userID << " has been sucessfully removed" << endl;
+		}
+	}
+
 	string returnUserType(Type type) {
 		switch (type) {
 		case 1:
@@ -542,18 +590,20 @@ public:
 		}
 	}
 
-	void printList() {
+	void printUser(User user) {
+		cout << "User Id: " << user.getUserID() << endl;
+		cout << "Username: " << user.getUserName() << endl;
+		cout << "Email: " << user.getUserEmail() << endl;
+		cout << "Country: " << user.getUserCountry() << endl;
+		cout << "Type: " << returnUserType(user.getUserType()) << endl;
+		cout << "------------------------------------------" << endl;
+	}
+
+	void printUserList() {
 		cout << "------------------------------------------" << endl;
 		for (auto it = users.fbegin(); it != users.fend(); ++it) {
-			cout << "User Id: " << (*it).getUserID() << endl;
-			cout << "Username: " << (*it).getUserName() << endl;
-			cout << "Email: " << (*it).getUserEmail() << endl;
-			cout << "Country: " << (*it).getUserCountry() << endl;
-			cout << "Type: " << returnUserType((*it).getUserType()) << endl;
-			cout << "------------------------------------------" << endl;
+			printUser(*it);
 		}
-
-		indexID.levelOrderTraversal();
 	}
 };
 
@@ -579,7 +629,18 @@ int main() {
 		User user5(4, "Fatima", "fatima5@gmail.com", "Pakistan", New);
 		userList.addUser(user5);
 
-		userList.printList();
+		userList.printUserList();
+
+		userList.searchUser(1);
+		userList.searchUser(0);
+		userList.searchUser(5);
+		userList.searchUser(6);
+
+		userList.delUser(1);
+		userList.delUser(55);
+		userList.delUser(3);
+
+		userList.printUserList();
 	}
 
 	_CrtDumpMemoryLeaks() ? cout << "Leaks Found\n" : cout << "No Leaks Found\n";
