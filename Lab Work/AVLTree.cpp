@@ -83,7 +83,7 @@ public:
 		X->height = max(height(X->left), height(X->right)) + 1;
 		Y->height = max(height(Y->left), height(Y->right)) + 1;
 
-		(isXRoot) ? root = Y : searchParent(X)->right = Y;
+		(isXRoot) ? root = Y : searchParent(X)->left = Y;
 	}
 
 	void rightRotate(AVLNode*& node) {
@@ -99,7 +99,7 @@ public:
 		X->height = max(height(X->left), height(X->right)) + 1;
 		Y->height = max(height(Y->left), height(Y->right)) + 1;
 
-		(isXRoot) ? root = Y : searchParent(X)->left = Y;
+		(isXRoot) ? root = Y : searchParent(X)->right = Y;
 	}
 
 	void leftRightRotate(AVLNode*& node) {
