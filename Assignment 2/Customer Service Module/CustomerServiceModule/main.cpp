@@ -125,7 +125,7 @@ private:
 		X->height = max(height(X->left), height(X->right)) + 1;
 		Y->height = max(height(Y->left), height(Y->right)) + 1;
 
-		node = Y;
+		(isXRoot) ? root = Y : searchParent(X)->left = Y;
 	}
 
 	void rightRotate(AVLNode*& node) {
@@ -141,7 +141,7 @@ private:
 		X->height = max(height(X->left), height(X->right)) + 1;
 		Y->height = max(height(Y->left), height(Y->right)) + 1;
 
-		node = Y;
+		(isXRoot) ? root = Y : searchParent(X)->right = Y;
 	}
 
 	void leftRightRotate(AVLNode*& node) {
@@ -232,6 +232,20 @@ private:
 
 		balance(root);
 		return root;
+	}
+
+	AVLNode*& searchParent(AVLNode* child) {
+		AVLNode* curr = root;
+
+		while (curr) {
+			if (curr->right == child || curr->left == child) {
+				return curr;
+			}
+
+			(child->data > curr->data) ? curr = curr->right : curr = curr->left;
+		}
+
+		return curr;
 	}
 
 	AVLNode* getParent(AVLNode* root, T key) {
@@ -515,13 +529,13 @@ public:
 			break;
 		case 2:
 			return "Regular";
-			break; 
+			break;
 		case 3:
 			return "Silver";
-			break; 
+			break;
 		case 4:
 			return "Gold";
-			break; 
+			break;
 		case 5:
 			return "Platinum";
 			break;
@@ -538,6 +552,8 @@ public:
 			cout << "Type: " << returnUserType((*it).getUserType()) << endl;
 			cout << "------------------------------------------" << endl;
 		}
+
+		indexID.levelOrderTraversal();
 	}
 };
 
@@ -564,8 +580,8 @@ int main() {
 		userList.addUser(user5);
 
 		userList.printList();
-	} 
-	
+	}
+
 	_CrtDumpMemoryLeaks() ? cout << "Leaks Found\n" : cout << "No Leaks Found\n";
 
 	return 0;
