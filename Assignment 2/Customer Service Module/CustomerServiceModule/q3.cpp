@@ -794,6 +794,15 @@ private:
 		}
 	}
 
+	void printUser(User user) {
+		cout << "User Id: " << user.getUserID() << endl;
+		cout << "Username: " << user.getUserName() << endl;
+		cout << "Email: " << user.getUserEmail() << endl;
+		cout << "Country: " << user.getUserCountry() << endl;
+		cout << "Type: " << returnUserType(user.getUserType()) << endl;
+		cout << "------------------------------------------" << endl;
+	}
+
 public:
 	UserList() : idIdx(), users() {}
 
@@ -995,15 +1004,6 @@ public:
 		}
 	}
 
-	void printUser(User user) {
-		cout << "User Id: " << user.getUserID() << endl;
-		cout << "Username: " << user.getUserName() << endl;
-		cout << "Email: " << user.getUserEmail() << endl;
-		cout << "Country: " << user.getUserCountry() << endl;
-		cout << "Type: " << returnUserType(user.getUserType()) << endl;
-		cout << "------------------------------------------" << endl;
-	}
-
 	void printUserList() {
 		cout << "------------------------------------------" << endl;
 		for (auto it = users.fbegin(); it != users.fend(); ++it) {
@@ -1019,6 +1019,64 @@ public:
 int User::currentUserID = 0;
 
 // ===========================
+//       Helper Functions
+// ===========================
+
+void inputData(UserList& userList) {
+	User user1(2, "Muhaimin", "muhaimin1@gmail.com", "Pakistan", Platinum);
+	userList.addUser(user1);
+
+	User user2(5, "Ahmed", "ahmed2@gmail.com", "Canada", Gold);
+	userList.addUser(user2);
+
+	User user3(3, "Sara", "sara3@gmail.com", "Australia", Silver);
+	userList.addUser(user3);
+
+	User user4(1, "Ali", "ali4@gmail.com", "Canada", Regular);
+	userList.addUser(user4);
+
+	User user5(4, "Fatima", "fatima5@gmail.com", "Pakistan", New);
+	userList.addUser(user5);
+}
+
+void test(UserList& userList) {
+	userList.searchUserById(1);
+	userList.searchUserById(77);
+
+	userList.searchUserByName("Ahmed");
+	userList.searchUserByName("Ameer");
+
+	userList.searchUserByEmail("muhaimin1@gmail.com");
+	userList.searchUserByEmail("muhaimin17@hotmail.com");
+
+	userList.searchUsersByCountry("Pakistan");
+	userList.searchUsersByCountry("Denmark");
+
+	userList.searchUsersByType(Platinum);
+	userList.searchUsersByType(Regular);
+
+	userList.delUserById(2);
+	userList.delUserByName("Sara");
+	userList.delUserByEmail("fatima5@gmail.com");
+
+	userList.searchUserById(2);
+	userList.searchUserByName("Sara");
+	userList.searchUserByEmail("fatima5@gmail.com");
+
+	userList.delUsersByCountry("Canada");
+	userList.delUsersByCountry("Pakistan");
+	userList.delUsersByCountry("Australia");
+	userList.delUsersByType(Platinum);
+	userList.delUsersByType(New);
+
+	userList.searchUsersByCountry("Pakistan");
+	userList.searchUsersByCountry("Canada");
+	userList.searchUsersByCountry("Australia");
+	userList.searchUsersByType(Platinum);
+	userList.searchUsersByType(New);
+}
+
+// ===========================
 //        Main Function
 // ===========================
 
@@ -1026,58 +1084,11 @@ int main() {
 	{
 		UserList userList;
 
-		User user1(2, "Muhaimin", "muhaimin1@gmail.com", "Pakistan", Platinum);
-		userList.addUser(user1);
-
-		User user2(5, "Ahmed", "ahmed2@gmail.com", "Canada", Gold);
-		userList.addUser(user2);
-
-		User user3(3, "Sara", "sara3@gmail.com", "Australia", Silver);
-		userList.addUser(user3);
-
-		User user4(1, "Ali", "ali4@gmail.com", "Canada", Regular);
-		userList.addUser(user4);
-
-		User user5(4, "Fatima", "fatima5@gmail.com", "Pakistan", New);
-		userList.addUser(user5);
+		inputData(userList);
 
 		userList.printUserList();
 
-		/*userList.searchUserById(1);
-		userList.searchUserByName("Ahmed");
-		userList.searchUserByEmail("muhaimin1@gmail.com");
-		userList.searchUsersByCountry("Pakistan");
-		userList.searchUsersByCountry("Canada");
-		userList.searchUsersByCountry("Australia");
-		userList.searchUsersByCountry("Denmark");
-
-		userList.searchUsersByType(Platinum);
-		userList.searchUsersByType(Regular);
-		userList.searchUsersByType(New);
-		userList.searchUsersByType(Silver);
-		userList.searchUsersByType(Gold);*/
-
-		//userList.delUserById(2);
-		//userList.delUserByName("Sara");
-		//userList.delUserByEmail("fatima5@gmail.com");
-
-		//userList.searchUserById(2);
-		//userList.searchUserByName("Sara");
-		//userList.searchUserByEmail("fatima5@gmail.com");
-
-		userList.delUsersByCountry("Canada");
-		userList.delUsersByCountry("Pakistan");
-		userList.delUsersByCountry("Australia");
-		userList.delUsersByType(Platinum);
-		userList.delUsersByType(New);
-
-		userList.searchUsersByCountry("Pakistan");
-		userList.searchUsersByCountry("Canada");
-		userList.searchUsersByCountry("Australia");
-		userList.searchUsersByType(Platinum);
-		userList.searchUsersByType(New);
-
-		//userList.printUserList();
+		test(userList);
 	}
 
 	_CrtDumpMemoryLeaks() ? cout << "Leaks Found\n" : cout << "No Leaks Found\n";
