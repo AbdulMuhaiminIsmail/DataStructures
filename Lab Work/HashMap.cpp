@@ -18,14 +18,32 @@ private:
 public:
 	HashMap(int tableSize, int collisionMethod) : collisionMethod(collisionMethod), hashMap(tableSize) {}
 
-	// Hash Functions
+	// Hash Functions for Integer Keys
 	int hash1(int key) const {
-		return (key % hashMap.size());
-	}
-
-	int hash2(int key) const {
 		const int a = 123, b = 456, k = 77, p = 10007;
 		return ((((a * k) + b) % p) % hashMap.size());
+	}
+	
+	int hash2(int key) const {
+		int prime = 7; // A prime number less than the table size
+		return prime - (key % prime);
+	}
+
+	// Primary Hash Function for Strings (DJB2)
+	int hash1(string str) const {
+		unsigned long hash = 5381;
+		for (char c : str) {
+			hash = ((hash << 5) + hash) + c; // hash * 33 + c
+		}
+		return static_cast<int>(hash % hashMap.size());
+	}
+
+	int hash2(string str) const {
+		unsigned long hash = 0;
+		for (char c : str) {
+			hash = c + (hash << 6) + (hash << 16) - hash;
+		}
+		return static_cast<int>((hash % (hashMap.size() - 1)) + 1); // Ensure it's non-zero
 	}
 
 	// Collision Resolution Methods (II - Insertion Index)
@@ -233,36 +251,67 @@ public:
 	}
 };
 
+class Point {
+public:
+	int x, y;
+
+	Point(int x = 0, int y = 0) : x(x), y(y) {}
+
+	friend ostream& operator<<(ostream& os, const Point& point) {
+		os << "(" << point.x << ", " << point.y << ")";
+		return os;
+	}
+};
+
+
 int main() {
-	{
-		// Create a HashMap with table size 10 and using linear probing (collisionMethod = 1)
-		HashMap<int, int> hashMap(10, 1);
+	// Test with string keys and int values
+	for (int method = 1; method <= 3; ++method) {
+		cout << "Testing with collision method " << method << " (string keys, int values)" << endl;
+		HashMap<string, int> hashMap(11, method);
 
-		// Insert key-value pairs
-		hashMap.Insert(1, 100);
-		hashMap.Insert(2, 200);
-		hashMap.Insert(3, 300);
-		hashMap.Insert(4, 400);
+		hashMap.Insert("one", 1);
+		hashMap.Insert("two", 2);
+		hashMap.Insert("three", 3);
+		hashMap.Insert("four", 4);
+		hashMap.Insert("five", 5);
 
-		// Print the HashMap contents
 		hashMap.Print();
+		cout << endl;
+	}
 
-		// Update a value
-		hashMap.Update(2, 250);
+	// Test with string keys and Point values
+	for (int method = 1; method <= 3; ++method) {
+		cout << "Testing with collision method " << method << " (string keys, Point values)" << endl;
+		HashMap<string, Point> hashMap(11, method);
+
+		hashMap.Insert("A", Point(1, 2));
+		hashMap.Insert("B", Point(3, 4));
+		hashMap.Insert("C", Point(5, 6));
+		hashMap.Insert("D", Point(7, 8));
+		hashMap.Insert("E", Point(9, 10));
+
 		hashMap.Print();
+		cout << endl;
+	}
 
-		// Access a value
-		vector<pair<int, int>> accessed = hashMap.Access(2);
-		for (const auto& kv : accessed) {
-			cout << "Accessed: Key = " << kv.first << ", Value = " << kv.second << endl;
-		}
+	// Test with int keys and Point values
+	for (int method = 1; method <= 4; ++method) {
+		cout << "Testing with collision method " << method << " (int keys, Point values)" << endl;
+		HashMap<int, Point> hashMap(11, method);
 
-		// Delete a key
-		hashMap.Delete(3);
+		hashMap.Insert(1, Point(1, 2));
+		hashMap.Insert(2, Point(3, 4));
+		hashMap.Insert(3, Point(5, 6));
+		hashMap.Insert(4, Point(7, 8));
+		hashMap.Insert(5, Point(9, 10));
+
 		hashMap.Print();
-	} 
+		cout << endl;
+	}
 
-	_CrtDumpMemoryLeaks() ? cout << "Leaks Found" << endl : cout << "No Leaks Found" << endl;
-
+	_CrtDumpMemoryLeaks() ? cout << "Leaks Found" : cout << "No Leaks Found";
 	return 0;
 }
+
+
