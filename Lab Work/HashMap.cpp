@@ -20,9 +20,6 @@ private:
     int collisionMethod;
     vector<list<Node*>> hashMap;
 
-public:
-    HashMap(int tableSize, int collisionMethod, bool grpFlag = false) : collisionMethod(collisionMethod), hashMap(tableSize), grpFlag(grpFlag) {}
-
     // Hash Functions for Integer Keys
     int hash1(int key) const {
         const int a = 123, b = 456, k = 77, p = 10007;
@@ -150,7 +147,9 @@ public:
         }
     }
 
-    // Main Functions
+public:
+    HashMap(int tableSize, int collisionMethod, bool grpFlag = false) : collisionMethod(collisionMethod), hashMap(tableSize), grpFlag(grpFlag) {}
+
     void print() {
         cout << "HashMap Contents:" << endl;
         cout << "-------------------" << endl;
