@@ -51,6 +51,20 @@ public:
 		}
 	}
 
+	void dfsSpanningTree(const int& vertex, vector<bool>& visited) {
+		if (!visited[vertex]) {
+			cout << vertex << " " << endl;
+			visited[vertex] = true;
+		}
+
+		for (auto it = adjList[vertex].begin(); it != adjList[vertex].end(); ++it) {
+			if (!visited[*it]) {
+				cout << "(" << vertex << "," << *it << ")" << endl;
+				dfsSpanningTree(*it, visited);
+			}
+		}
+	}
+
 	void printAdjList() {
 		for (int i = 0; i < vertices; i++) {
 			cout << "V" << i << "\t|\t";
