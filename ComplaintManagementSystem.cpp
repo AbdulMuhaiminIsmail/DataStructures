@@ -1,7 +1,8 @@
-﻿#include <queue>
 #include <string>
 #include <iostream>
 #include <conio.h>
+#include <queue>
+#include <vector>
 
 using namespace std;
 
