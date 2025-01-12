@@ -1781,11 +1781,6 @@ int Complaint::currentId = 0;
 // ===========================
 
 int main() {
-    {
-        CMS().mainMenu();
-    }
-
-    _CrtDumpMemoryLeaks() ? cout << "Leaks Found\n" : cout << "No Leaks Found\n";
-
+    CMS.mainMenu();
     return 0;
 }
